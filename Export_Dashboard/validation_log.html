@@ -1,0 +1,214 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Export Validation Log</title><style>
+                :root{--brand:#2f6f17;--muted:#4a5568;--bg:#f6f7f9}
+                body{font-family:Segoe UI, Arial, sans-serif;background:var(--bg);padding:20px;margin:0}
+                .page-wrap{max-width:1100px;margin:20px auto;position:relative}
+                .card{background:#fff;border-radius:8px;padding:22px 22px 30px 22px;box-shadow:0 2px 6px rgba(0,0,0,0.08);position:relative;overflow:visible}
+                h1{color:var(--brand);margin:0 0 10px 0}
+                .meta{color:#555;font-size:0.95rem;margin-bottom:12px}
+                .entry{font-family:Times New Roman;background:#f3f4f6;padding:8px;margin:6px 0;border-radius:6px;overflow:auto}
+                .success{color:green}.error{color:red}
+                table.sample{border-collapse:collapse;width:100%;font-family:Segoe UI, Arial, sans-serif;margin-top:12px}
+                table.sample th, table.sample td{border:1px solid #e9ecef;padding:6px;vertical-align:top;text-align:left}
+                table.sample thead th{background:#f3f4f6;font-weight:600}
+            
+                /* top-right button group */
+                .top-right-actions{position:absolute;top:12px;right:12px;display:flex;gap:8px;align-items:center;z-index:10}
+                .btn-download{display:inline-block;padding:8px 12px;border-radius:6px;background:var(--brand);color:white;text-decoration:none;border:none;cursor:pointer;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,0.12)}
+                .btn-secondary{background:var(--muted)}
+                .pdf-note{font-size:0.85rem;color:#333;margin-right:auto;display:none} /* hidden in top-right layout */
+            
+                /* force color based on data-match attribute (defensive) */
+                table.sample td[data-match="true"] { background: #90dba5 !important; }
+                table.sample td[data-match="false"] { background: #e88a8a !important; }
+            
+                @media print {
+                  .top-right-actions{display:none !important}
+                }
+            </style></head><body><div class='page-wrap'>
+                <div class="top-right-actions" aria-hidden="false">
+                  <button id="download-pdf" class="btn-download" title="Download PDF">⬇️ Download PDF</button>
+                  <button id="print-pdf" class="btn-download btn-secondary" title="Print" onclick="window.print();">🖨️ Print</button>
+                </div>
+            <div class='card' id='report-content'><h1>Export Dashboard Validation Log</h1><div class='meta'><strong>Customer:</strong> AllCare To You &nbsp; | &nbsp; <strong>Export:</strong> Contact Export &nbsp; | &nbsp; <strong>Generated:</strong> 2025-12-19 16:07:59</div><hr><div class='entry'>[2025-12-19 16:07:42] Config Parser read data from: C:\Users\nsikder\Downloads\config.ini</div>
+<div class='entry'>[2025-12-19 16:07:43] Chrome Driver Setup done.</div>
+<div class='entry'>[2025-12-19 16:07:43] Logging into Cozeva (CERT)...</div>
+<div class='entry'>[2025-12-19 16:07:58] Notice: ajax_preloader_wait exception (may be safe): Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=142.0.7444.176)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45616ad
+	0x7ff6e454d1c5
+	0x7ff6e4572a5a
+	0x7ff6e45ea306
+	0x7ff6e460b222
+	0x7ff6e45ab068
+	0x7ff6e45abe93
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e47f0c14
+	0x7ff6e47f0dcf
+	0x7ff6e47d6828
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+<div class='entry'>[2025-12-19 16:07:58] Logged in successfully (CERT).</div>
+<div class='entry'>[2025-12-19 16:07:58] Running Contact Export...</div>
+<div class='entry'>[2025-12-19 16:07:59] Unexpected error while checking contact_log_tab: Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45614b5
+	0x7ff6e45aa141
+	0x7ff6e45e2882
+	0x7ff6e45dd0ef
+	0x7ff6e45dc2ea
+	0x7ff6e452acb5
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e452977b
+	0x7ff6e4bdb848
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+<div class='entry'>[2025-12-19 16:07:59] Warning: unexpected error while trying to click sidenav_slide_out: Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45614b5
+	0x7ff6e45aa141
+	0x7ff6e45e2882
+	0x7ff6e45dd0ef
+	0x7ff6e45dc2ea
+	0x7ff6e452acb5
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e452977b
+	0x7ff6e4bdb848
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+<div class='entry'>[2025-12-19 16:07:59] Notice: ajax_preloader_wait exception (may be safe): Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45614b5
+	0x7ff6e45aa141
+	0x7ff6e45e2882
+	0x7ff6e45dd0ef
+	0x7ff6e45dc2ea
+	0x7ff6e452acb5
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e452977b
+	0x7ff6e4bdb848
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+<div class='entry'>[2025-12-19 16:07:59] ❌ Could not click contact_log_tab: Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45614b5
+	0x7ff6e45aa141
+	0x7ff6e45e2882
+	0x7ff6e45dd0ef
+	0x7ff6e45dc2ea
+	0x7ff6e452acb5
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e452977b
+	0x7ff6e4bdb848
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+<div class='entry'>[2025-12-19 16:07:59] ❌ Message: invalid session id
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6e47e7a35
+	0x7ff6e47e7a90
+	0x7ff6e45614b5
+	0x7ff6e45aa141
+	0x7ff6e45e2882
+	0x7ff6e45dd0ef
+	0x7ff6e45dc2ea
+	0x7ff6e452acb5
+	0x7ff6e4aa29d0
+	0x7ff6e4a9ce50
+	0x7ff6e4abcc45
+	0x7ff6e48030ce
+	0x7ff6e480adbf
+	0x7ff6e452977b
+	0x7ff6e4bdb848
+	0x7ffb87ece8d7
+	0x7ffb8a18c53c
+</div>
+</div></div>
+            <!-- html2pdf (bundles html2canvas + jsPDF) from CDN -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+            <script>
+            (function(){
+                var downloadBtn = document.getElementById('download-pdf');
+
+                function fallback_print(){
+                    alert('Automatic PDF generation failed or offline. The browser print dialog will open; choose "Save as PDF" to save.');
+                    window.print();
+                }
+
+                downloadBtn.addEventListener('click', function(){
+                    downloadBtn.disabled = true;
+                    var originalText = downloadBtn.innerText;
+                    downloadBtn.innerText = 'Generating PDF...';
+
+                    var element = document.getElementById('report-content');
+
+                    if (typeof html2pdf === 'undefined') {
+                        console.warn('html2pdf not available; falling back to print.');
+                        downloadBtn.innerText = originalText;
+                        downloadBtn.disabled = false;
+                        fallback_print();
+                        return;
+                    }
+
+                    var opt = {
+                        margin:       0.35,
+                        filename:     'export_report.pdf',
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2, useCORS: true, allowTaint: true },
+                        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+                    };
+
+                    html2pdf().set(opt).from(element).save().then(function(){
+                        downloadBtn.innerText = originalText;
+                        downloadBtn.disabled = false;
+                    }).catch(function(err){
+                        console.error('html2pdf error:', err);
+                        downloadBtn.innerText = originalText;
+                        downloadBtn.disabled = false;
+                        fallback_print();
+                    });
+                });
+            })();
+            </script>
+            </body></html>
