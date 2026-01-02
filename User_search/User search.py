@@ -1,16 +1,19 @@
 import csv
 import threading
+import webbrowser
 from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
+from tkinter import font as tkfont
 
 from user_validation_runner import run_user_validation
 
 # ─── Constants ─────────────────────────────────────────
-CSV_FILE_PATH = r"C:\Users\nsikder\PycharmProjects\User search\Customer.csv"
+CSV_FILE_PATH = r"C:\Users\nsikder\PycharmProjects\User_search\Customer.csv"
 bg_color = "#7dab41"
 
-FONT_BOLD_10 = ("Arial", 10)
+FONT_10 = ("Arial", 10)
+FONT_11 = ("Arial", 11)
 FONT_BOLD_11 = ("Arial", 11, "bold")
 FONT_BOLD_13 = ("Arial", 13, "bold")
 FONT_COMBOBOX = ("Arial", 9, "bold")
@@ -50,7 +53,7 @@ class ToolTip:
             text=self.text,
             bg=bg_color,
             fg="black",
-            font=FONT_BOLD_10,
+            font=FONT_10,
             padx=6,
             pady=4,
             relief="solid",
@@ -67,26 +70,130 @@ class ToolTip:
 def open_faq_window(parent):
     faq = Toplevel(parent)
     faq.title("FAQ")
-    faq.geometry("350x250")
+    faq.geometry("400x450")
     faq.configure(bg="white")
     faq.resizable(False, False)
 
-    Label(faq, text="Frequently Asked Questions", font=FONT_BOLD_13).pack(pady=10)
+    Label(faq, text="Guide and documentations", font=FONT_BOLD_13).pack(pady=10)
 
     Label(
         faq,
         text=(
-            "• CERT is selected by default\n\n"
-            "• Select a customer\n\n"
-            "• Choose at least one area\n\n"
-            "• Use Select All to toggle options\n\n"
-            "• Click SUBMIT to start validation"
+            "- CERT is selected by default\n\n"
+            "- Select a customer [For now Simulated Customer 1 (Deid)]\n\n"
+            "- Choose at least one area\n\n"
+            "- Use Select All to toggle options\n\n"
+            "- Click SUBMIT to start validation"
         ),
-        font=FONT_BOLD_10,
+        font=FONT_10,
         wraplength=320,
         justify="left",
         bg="white",
-    ).pack(padx=15, pady=10)
+    ).pack(padx=15, pady=10, anchor="w")
+
+    # ---- Clickable "More details" link ----
+    userlistpdf_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\User_Search_in_User_List_Process_UI.pdf"
+    batchsharepdf_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\Batch_Share_User_Search_Process_UI.pdf"
+    analyticspdf_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\Analytics_User_Search_Process_UI.pdf"
+    supportticketpdf_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\Support_Ticket_User_Search_Process_UI.pdf"
+    casemanagementpdf_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\Case_Management_User_Search_Process_UI.pdf"
+    deletetestongdata_path = r"C:\Users\nsikder\PycharmProjects\User_search\Documents\Delete_Testing_Data_User_Search_Process_UI.pdf"
+
+
+
+    link_font = tkfont.Font(family="Arial", size=10, underline=True)
+
+    more_details = Label(
+        faq,
+        text="- More details about User List user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details1 = Label(
+        faq,
+        text="- More details about Batch Share user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details2 = Label(
+        faq,
+        text="- More details about Analytics user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details3 = Label(
+        faq,
+        text="- More details about Support Ticket user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details4 = Label(
+        faq,
+        text="- More details about Case Management user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details5 = Label(
+        faq,
+        text="- More details about Delete Testing Data user search",
+        font=link_font,
+        fg="blue",
+        bg="white",
+        cursor="hand1",
+        wraplength=320,
+        justify="left"
+    )
+    more_details.pack(padx=15, pady=(0, 10), anchor="w")
+    more_details1.pack(padx=15, pady=(0, 10), anchor="w")
+    more_details2.pack(padx=15, pady=(0, 10), anchor="w")
+    more_details3.pack(padx=15, pady=(0, 10), anchor="w")
+    more_details4.pack(padx=15, pady=(0, 10), anchor="w")
+    more_details5.pack(padx=15, pady=(0, 10), anchor="w")
+
+    def open_pdf(event):
+        webbrowser.open(userlistpdf_path)
+
+    def open_pdf1(event):
+        webbrowser.open(batchsharepdf_path)
+
+    def open_pdf2(event):
+        webbrowser.open(analyticspdf_path)
+
+    def open_pdf3(event):
+        webbrowser.open(supportticketpdf_path)
+
+    def open_pdf4(event):
+        webbrowser.open(casemanagementpdf_path)
+
+    def open_pdf5(event):
+        webbrowser.open(deletetestongdata_path)
+
+    more_details.bind("<Button-1>", open_pdf)
+    more_details1.bind("<Button-1>", open_pdf1)
+    more_details2.bind("<Button-1>", open_pdf2)
+    more_details3.bind("<Button-1>", open_pdf3)
+    more_details4.bind("<Button-1>", open_pdf4)
+    more_details5.bind("<Button-1>", open_pdf5)
 
 
 # ─── Main Window ──────────────────────────────────────
@@ -162,18 +269,14 @@ def launch_main_window():
     canvas.bind("<Leave>", lambda e: canvas.unbind_all("<MouseWheel>"))
 
     areas = [
-        "User List", "Batch Share", "Secure Messaging",
-        "Analytics (Batch share, workbook share)", "Support Ticket",
-        "Case Management", "User Creation", "Provider Creation",
-        "Connect Account", "Delete Testing Data", "Log In",
-        "Reset Password", "PCR Support Tool", "Bridge", "Add Delegate"
-    ]
+        "User List", "Batch Share", "Secure Messaging","Analytics", "Support Ticket", "Case Management", "Delete Testing Data", "PCR Support Tool", "Bridge",
+        "User Creation", "Provider Creation", "Connect Account", "Log In", "Reset Password", "Add Delegate"]
 
     tooltip_texts = {
         "User List": "Search and validate users",
         "Batch Share": "Verify batch sharing functionality",
         "Secure Messaging": "Validate secure message access",
-        "Analytics (Batch share, workbook share)": "Analytics sharing checks",
+        "Analytics": "Analytics sharing checks",
         "Support Ticket": "Verify support ticket search",
         "Case Management": "Case management validation",
         "User Creation": "Check newly created users",
@@ -202,7 +305,7 @@ def launch_main_window():
         variable=select_all_var,
         command=toggle_all,
         bg="white",
-        font=("Arial", 10, "bold"),
+        font=FONT_BOLD_11
     )
     select_all_cb.pack(anchor="w", pady=(2, 6))
     ToolTip(select_all_cb, "Select / deselect all areas")
@@ -211,7 +314,7 @@ def launch_main_window():
     for area in areas:
         var = BooleanVar(value=True)
         cbx = Checkbutton(frame, text=area, variable=var,
-                          bg="white", font=FONT_BOLD_10)
+                          bg="white", font=FONT_11)
         cbx.pack(anchor="w", pady=2)
         ToolTip(cbx, tooltip_texts.get(area, area))
         vars_map[area] = var
@@ -222,14 +325,14 @@ def launch_main_window():
     env_frame = Frame(win, bg="white")
     env_frame.pack(pady=(0, 10))
 
-    Label(env_frame, text="Environment:", bg="white", font=FONT_BOLD_11) \
+    Label(env_frame, text="Environment:", bg="white", font=FONT_BOLD_11)\
         .pack(side="left", padx=(0, 10))
 
     Radiobutton(env_frame, text="CERT", variable=env_var, value="CERT",
-                bg="white", font=FONT_BOLD_10).pack(side="left", padx=5)
+                bg="white", font=FONT_10).pack(side="left", padx=5)
 
     Radiobutton(env_frame, text="PROD", variable=env_var, value="PROD",
-                bg="white", font=FONT_BOLD_10).pack(side="left", padx=5)
+                bg="white", font=FONT_10).pack(side="left", padx=5)
 
     # ─── Submit ─────────────────────
     def submit():
@@ -245,20 +348,17 @@ def launch_main_window():
         win.withdraw()
 
         threading.Thread(
-            target=run_user_validation,
-            args=(win, customer_var.get(), selected, env_var.get()),
+            target=lambda: (
+                run_user_validation(win, customer_var.get(), selected, env_var.get()),
+                win.after(0, win.destroy)  # ✅ close app cleanly
+            ),
             daemon=True,
         ).start()
 
     Button(
         win,
-        text="SUBMIT",
-        bg=bg_color,
-        fg="white",
-        font=FONT_BOLD_11,
-        width=22,
-        command=submit,
-    ).pack(pady=10)
+        text="SUBMIT", bg=bg_color, fg="white",
+        font=FONT_BOLD_11, width=22, command=submit).pack(pady=10)
 
     win.mainloop()
 
