@@ -37,135 +37,144 @@ def log(message: str) -> None:
     log_entries.append(entry)
     print(entry)
 
+def extract_failed_logs(logs: list[str]) -> list[str]:
+    """
+    Extract failure-related log entries.
+    A failure is identified by the ❌ marker.
+    """
+    return [entry for entry in logs if "❌" in entry]
+
 
 def save_logs_to_html(customer: str,
                       export_type: str,
                       filename: Path = LOG_HTML_FILE,
                       sample_table_html: Optional[str] = None) -> None:
     """
-    Write log_entries to a styled HTML file and optionally insert a sample_table_html fragment.
-    Adds a 'Download PDF' button in the top-right corner of the report card which uses
-    html2pdf (html2pdf.bundle.min.js) to convert the report to a paginated PDF and trigger a download.
-    Falls back to window.print() if the library can't load.
+    Write log_entries to a styled HTML file.
+    Adds:
+    - Failed Cases Summary at the top (after divider)
+    - Download PDF + Print buttons
+    - Optional CSV sample table with match coloring
     """
     global html_report_written
     try:
         outpath = Path(filename)
+        failed_logs = extract_failed_logs(log_entries)
+
         with outpath.open("w", encoding="utf-8") as f:
-            f.write("<!doctype html><html><head><meta charset='utf-8'><title>Export Validation Log</title>")
-            f.write("""<style>
+            f.write("<!doctype html><html><head><meta charset='utf-8'>")
+            f.write("<title>Export Validation Log</title>")
+
+            f.write("""
+            <style>
                 :root{--brand:#2f6f17;--muted:#4a5568;--bg:#f6f7f9}
                 body{font-family:Segoe UI, Arial, sans-serif;background:var(--bg);padding:20px;margin:0}
                 .page-wrap{max-width:1100px;margin:20px auto;position:relative}
-                .card{background:#fff;border-radius:8px;padding:22px 22px 30px 22px;box-shadow:0 2px 6px rgba(0,0,0,0.08);position:relative;overflow:visible}
+                .card{background:#fff;border-radius:8px;padding:22px 22px 30px 22px;
+                      box-shadow:0 2px 6px rgba(0,0,0,0.08);position:relative}
                 h1{color:var(--brand);margin:0 0 10px 0}
+                h2{margin:0 0 8px 0}
                 .meta{color:#555;font-size:0.95rem;margin-bottom:12px}
-                .entry{font-family:Times New Roman;background:#f3f4f6;padding:8px;margin:6px 0;border-radius:6px;overflow:auto}
-                .success{color:green}.error{color:red}
-                table.sample{border-collapse:collapse;width:100%;font-family:Segoe UI, Arial, sans-serif;margin-top:12px}
-                table.sample th, table.sample td{border:1px solid #e9ecef;padding:6px;vertical-align:top;text-align:left}
-                table.sample thead th{background:#f3f4f6;font-weight:600}
-            
-                /* top-right button group */
-                .top-right-actions{position:absolute;top:12px;right:12px;display:flex;gap:8px;align-items:center;z-index:10}
-                .btn-download{display:inline-block;padding:8px 12px;border-radius:6px;background:var(--brand);color:white;text-decoration:none;border:none;cursor:pointer;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,0.12)}
+                .entry{font-family:Times New Roman;background:#f3f4f6;
+                       padding:8px;margin:6px 0;border-radius:6px}
+                table.sample{border-collapse:collapse;width:100%;margin-top:12px}
+                table.sample th, table.sample td{
+                    border:1px solid #e9ecef;padding:6px;text-align:left}
+                table.sample thead th{background:#f3f4f6}
+
+                .top-right-actions{
+                    position:absolute;top:12px;right:12px;display:flex;gap:8px;z-index:10}
+                .btn-download{
+                    padding:8px 12px;border-radius:6px;background:var(--brand);
+                    color:white;border:none;cursor:pointer;font-weight:600}
                 .btn-secondary{background:var(--muted)}
-                .pdf-note{font-size:0.85rem;color:#333;margin-right:auto;display:none} /* hidden in top-right layout */
-            
-                /* force color based on data-match attribute (defensive) */
-                table.sample td[data-match="true"] { background: #90dba5 !important; }
-                table.sample td[data-match="false"] { background: #e88a8a !important; }
-            
-                @media print {
-                  .top-right-actions{display:none !important}
-                }
-            </style></head><body>""")
 
-            # page wrapper (positions top-right actions relative to this)
-            f.write("<div class='page-wrap'>")
+                table.sample td[data-match="true"]{background:#90dba5!important}
+                table.sample td[data-match="false"]{background:#e88a8a!important}
 
-            # top-right actions: placed before card so it's still inside .page-wrap
-            f.write("""
-                <div class="top-right-actions" aria-hidden="false">
-                  <button id="download-pdf" class="btn-download" title="Download PDF">⬇️ Download PDF</button>
-                  <button id="print-pdf" class="btn-download btn-secondary" title="Print" onclick="window.print();">🖨️ Print</button>
-                </div>
+                @media print {.top-right-actions{display:none!important}}
+            </style>
+            </head><body>
             """)
 
-            # A wrapper that will be converted to PDF (the card)
+            f.write("<div class='page-wrap'>")
+
+            # Buttons
+            f.write("""
+            <div class="top-right-actions">
+                <button id="download-pdf" class="btn-download">⬇️ Download PDF</button>
+                <button class="btn-download btn-secondary" onclick="window.print()">🖨️ Print</button>
+            </div>
+            """)
+
             f.write("<div class='card' id='report-content'>")
+
+            # Header
             f.write("<h1>Export Dashboard Validation Log</h1>")
             f.write("<div class='meta'>")
-            f.write(f"<strong>Customer:</strong> {html.escape(str(customer))} &nbsp; | &nbsp; ")
-            f.write(f"<strong>Export:</strong> {html.escape(str(export_type))} &nbsp; | &nbsp; ")
+            f.write(f"<strong>Customer:</strong> {html.escape(customer)} &nbsp; | &nbsp; ")
+            f.write(f"<strong>Export:</strong> {html.escape(export_type)} &nbsp; | &nbsp; ")
             f.write(f"<strong>Generated:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             f.write("</div><hr>")
 
-            # write log entries
-            for e in log_entries:
-                f.write(f"<div class='entry'>{html.escape(e)}</div>\n")
+            # ================= FAILED CASES SECTION =================
+            if failed_logs:
+                f.write("""
+                <div style="margin:12px 0 18px 0;">
+                    <h2 style="color:#b91c1c;">❌ Failed Cases Summary</h2>
+                    <div style="
+                        background:#fff5f5;
+                        border:1px solid #f5c2c7;
+                        border-radius:6px;
+                        padding:10px;
+                        max-height:240px;
+                        overflow:auto;">
+                """)
+                for e in failed_logs:
+                    f.write(f"<div style='margin-bottom:6px;'>• {html.escape(e)}</div>")
+                f.write("</div></div>")
+            else:
+                f.write("""
+                <div style="margin:12px 0 18px 0;">
+                    <h2 style="color:#15803d;">✅ No Failed Cases Detected</h2>
+                </div>
+                """)
 
-            # insert the sample table HTML if provided
+            f.write("<hr>")
+
+            # ================= FULL LOG ENTRIES =================
+            for e in log_entries:
+                f.write(f"<div class='entry'>{html.escape(e)}</div>")
+
+            # ================= SAMPLE TABLE =================
             if sample_table_html:
                 f.write(sample_table_html)
 
-            f.write("</div>")  # end .card
-            f.write("</div>")  # end .page-wrap
+            f.write("</div></div>")
 
-            # Add html2pdf script and inline JS to wire the top-right download button
+            # PDF JS
             f.write("""
-            <!-- html2pdf (bundles html2canvas + jsPDF) from CDN -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
             <script>
-            (function(){
-                var downloadBtn = document.getElementById('download-pdf');
-
-                function fallback_print(){
-                    alert('Automatic PDF generation failed or offline. The browser print dialog will open; choose "Save as PDF" to save.');
-                    window.print();
-                }
-
-                downloadBtn.addEventListener('click', function(){
-                    downloadBtn.disabled = true;
-                    var originalText = downloadBtn.innerText;
-                    downloadBtn.innerText = 'Generating PDF...';
-
-                    var element = document.getElementById('report-content');
-
-                    if (typeof html2pdf === 'undefined') {
-                        console.warn('html2pdf not available; falling back to print.');
-                        downloadBtn.innerText = originalText;
-                        downloadBtn.disabled = false;
-                        fallback_print();
-                        return;
-                    }
-
-                    var opt = {
-                        margin:       0.35,
-                        filename:     'export_report.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { scale: 2, useCORS: true, allowTaint: true },
-                        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-                    };
-
-                    html2pdf().set(opt).from(element).save().then(function(){
-                        downloadBtn.innerText = originalText;
-                        downloadBtn.disabled = false;
-                    }).catch(function(err){
-                        console.error('html2pdf error:', err);
-                        downloadBtn.innerText = originalText;
-                        downloadBtn.disabled = false;
-                        fallback_print();
-                    });
-                });
-            })();
+            document.getElementById('download-pdf').addEventListener('click', function(){
+                var btn=this;
+                btn.disabled=true;
+                var el=document.getElementById('report-content');
+                html2pdf().from(el).set({
+                    margin:0.35,
+                    filename:'export_report.pdf',
+                    html2canvas:{scale:2},
+                    jsPDF:{unit:'in',format:'a4',orientation:'portrait'}
+                }).save().then(()=>btn.disabled=false)
+                .catch(()=>{btn.disabled=false;window.print();});
+            });
             </script>
             """)
 
             f.write("</body></html>")
 
         html_report_written = True
-        log(f"✅ Log saved to {outpath.resolve()} (HTML with top-right PDF/Print buttons)")
+        log(f"✅ Log saved to {outpath.resolve()} (HTML with failed summary)")
     except Exception as ex:
         log(f"❌ Failed to save HTML log: {ex}")
 
