@@ -253,7 +253,7 @@ def launch_main_window():
 
     btn1 = Button(
         root,
-        text="Contact log",
+        text="Contact log[WIP]",
         command=contact_log,
         bg="#b2df78",
         fg="black",
@@ -264,7 +264,7 @@ def launch_main_window():
 
     btn2 = Button(
         root,
-        text="Sticket log",
+        text="Sticket log[WIP]",
         command=sticket_log,
         bg="#b2df78",
         fg="black",
@@ -289,3 +289,4 @@ def launch_main_window():
 
 if __name__ == "__main__":
     launch_main_window()
+
