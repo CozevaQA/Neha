@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Export Validation Log</title>
+            <style>
+                :root{--brand:#2f6f17;--muted:#4a5568;--bg:#f6f7f9}
+                body{font-family:Segoe UI, Arial, sans-serif;background:var(--bg);padding:20px;margin:0}
+                .page-wrap{max-width:1100px;margin:20px auto;position:relative}
+                .card{background:#fff;border-radius:8px;padding:22px 22px 30px 22px;
+                      box-shadow:0 2px 6px rgba(0,0,0,0.08);position:relative}
+                h1{color:var(--brand);margin:0 0 10px 0}
+                h2{margin:0 0 8px 0}
+                .meta{color:#555;font-size:0.95rem;margin-bottom:12px}
+                .entry{font-family:Times New Roman;background:#f3f4f6;
+                       padding:8px;margin:6px 0;border-radius:6px}
+                table.sample{border-collapse:collapse;width:100%;margin-top:12px}
+                table.sample th, table.sample td{
+                    border:1px solid #e9ecef;padding:6px;text-align:left}
+                table.sample thead th{background:#f3f4f6}
+
+                .top-right-actions{
+                    position:absolute;top:12px;right:12px;display:flex;gap:8px;z-index:10}
+                .btn-download{
+                    padding:8px 12px;border-radius:6px;background:var(--brand);
+                    color:white;border:none;cursor:pointer;font-weight:600}
+                .btn-secondary{background:var(--muted)}
+
+                table.sample td[data-match="true"]{background:#90dba5!important}
+                table.sample td[data-match="false"]{background:#e88a8a!important}
+
+                @media print {.top-right-actions{display:none!important}}
+            </style>
+            </head><body>
+            <div class='page-wrap'>
+            <div class="top-right-actions">
+                <button id="download-pdf" class="btn-download">⬇️ Download PDF</button>
+                <button class="btn-download btn-secondary" onclick="window.print()">🖨️ Print</button>
+            </div>
+            <div class='card' id='report-content'><h1>Export Dashboard Validation Log</h1><div class='meta'><strong>Customer:</strong> Aetna (CAPCI) &nbsp; | &nbsp; <strong>Export:</strong> test &nbsp; | &nbsp; <strong>Generated:</strong> 2026-01-12 15:27:20</div><hr>
+                <div style="margin:12px 0 18px 0;">
+                    <h2 style="color:#15803d;">✅ No Failed Cases Detected</h2>
+                </div>
+                
+                <div style="margin:12px 0 18px 0;">
+                    <h2 style="color:#15803d;">✅ Passed Cases Summary</h2>
+                    <div style="
+                        background:#f0fdf4;
+                        border:1px solid #bbf7d0;
+                        border-radius:6px;
+                        padding:10px;
+                        max-height:200px;
+                        overflow:auto;">
+                <div style='margin-bottom:6px;'>• [2026-01-12 15:26:08] ✅ Patient Dashboard loaded</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:10] ✅ Patient dropdown opened</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:12] ✅ Messages menu visible</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:18] ✅ New sticket popup opened</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:18] ✅ Sticket text entered: New sticket for testing purpose CozevaQA</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:18] ✅ Sticket saved</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:20] ✅ Sticket dialog closed</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:29] ✅ Matching sticket row found</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:29] ✅ Patient link found: Pandora, Maryann</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:30] ✅ Switched to patient window</div><div style='margin-bottom:6px;'>• [2026-01-12 15:26:53] ✅ Edited sticket text: New sticket for testing purpose CozevaQA editing sticket for testing purpose</div><div style='margin-bottom:6px;'>• [2026-01-12 15:27:06] ✅ Sticket deleted successfully</div><div style='margin-bottom:6px;'>• [2026-01-12 15:27:06] ✅ Switched back to main window</div><div style='margin-bottom:6px;'>• [2026-01-12 15:27:14] ✅ Edited sticket NOT found after deletion — Test Passed</div><div style='margin-bottom:6px;'>• [2026-01-12 15:27:14] Sticket flow completed successfully ✅</div></div></div><div class='entry'>[2026-01-12 15:25:43] Initializing browser...</div><div class='entry'>[2026-01-12 15:25:43] Config Parser read data from: C:\python projects\config.ini</div><div class='entry'>[2026-01-12 15:25:44] Chrome Driver Setup done.</div><div class='entry'>[2026-01-12 15:25:44] Logging into Cozeva (CERT)...</div><div class='entry'>[2026-01-12 15:26:03] Logged in successfully (CERT).</div><div class='entry'>[2026-01-12 15:26:03] Creating sticket...</div><div class='entry'>[2026-01-12 15:26:03] ▶️ Opening Patient Dashboard page</div><div class='entry'>[2026-01-12 15:26:08] ✅ Patient Dashboard loaded</div><div class='entry'>[2026-01-12 15:26:08] ▶️ Clicking patient dropdown</div><div class='entry'>[2026-01-12 15:26:10] ✅ Patient dropdown opened</div><div class='entry'>[2026-01-12 15:26:10] ▶️ Hovering over Messages menu</div><div class='entry'>[2026-01-12 15:26:12] ✅ Messages menu visible</div><div class='entry'>[2026-01-12 15:26:12] ▶️ Clicking New Sticket</div><div class='entry'>[2026-01-12 15:26:18] ✅ New sticket popup opened</div><div class='entry'>[2026-01-12 15:26:18] ▶️ Entering sticket text</div><div class='entry'>[2026-01-12 15:26:18] ✅ Sticket text entered: New sticket for testing purpose CozevaQA</div><div class='entry'>[2026-01-12 15:26:18] ▶️ Saving sticket</div><div class='entry'>[2026-01-12 15:26:18] ✅ Sticket saved</div><div class='entry'>[2026-01-12 15:26:18] ▶️ Closing sticket dialog</div><div class='entry'>[2026-01-12 15:26:20] ✅ Sticket dialog closed</div><div class='entry'>[2026-01-12 15:26:29] Total sticket notes found: 35</div><div class='entry'>[2026-01-12 15:26:29] Sticket Note: New sticket for testing purpose CozevaQA- Sent by Sikder, Neha</div><div class='entry'>[2026-01-12 15:26:29] ✅ Matching sticket row found</div><div class='entry'>[2026-01-12 15:26:29] ✅ Patient link found: Pandora, Maryann</div><div class='entry'>[2026-01-12 15:26:30] ✅ Switched to patient window</div><div class='entry'>[2026-01-12 15:26:53] ✅ Edited sticket text: New sticket for testing purpose CozevaQA editing sticket for testing purpose</div><div class='entry'>[2026-01-12 15:27:06] ✅ Sticket deleted successfully</div><div class='entry'>[2026-01-12 15:27:06] ✅ Switched back to main window</div><div class='entry'>[2026-01-12 15:27:14] ✅ Edited sticket NOT found after deletion — Test Passed</div><div class='entry'>[2026-01-12 15:27:14] Sticket flow completed successfully ✅</div><div class='entry'>[2026-01-12 15:27:19] Validation completed</div></div></div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+            <script>
+            document.getElementById('download-pdf').addEventListener('click', function(){
+                var btn=this;
+                btn.disabled=true;
+                var el=document.getElementById('report-content');
+                html2pdf().from(el).set({
+                    margin:0.35,
+                    filename:'export_report.pdf',
+                    html2canvas:{scale:2},
+                    jsPDF:{unit:'in',format:'a4',orientation:'portrait'}
+                }).save().then(()=>btn.disabled=false)
+                .catch(()=>{btn.disabled=false;window.print();});
+            });
+            </script>
+            </body></html>
