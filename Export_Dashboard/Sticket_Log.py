@@ -634,7 +634,7 @@ class SticketCreation(CozevaLogin):
 
             patient_link = matched_row.find_element(By.XPATH, patient_link_xpath)
             patient_name = patient_link.text.strip()
-            log(f"✅ Patient link found: {patient_name}")
+            log(f"✅ Patient link found")
 
             parent_window = self.driver.current_window_handle
             existing_windows = self.driver.window_handles.copy()
@@ -773,4 +773,5 @@ def main() -> None:
         root.destroy()
     except Exception:
         pass
+
 
